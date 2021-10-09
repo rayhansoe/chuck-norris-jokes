@@ -1,6 +1,7 @@
 /* Baru */
 
 .navBg {
+	position: relative;
 	width: 100%;
 	background-color: #fffbeb;
 	height: auto;
