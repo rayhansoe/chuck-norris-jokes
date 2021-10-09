@@ -97,9 +97,11 @@ nav li:hover {
 }
 
 .container {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	width: 100%;
 	overflow-x: hidden;
+	gap: 1.6em;
 }
