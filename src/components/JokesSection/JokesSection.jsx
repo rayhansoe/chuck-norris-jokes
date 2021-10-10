@@ -1,19 +1,18 @@
-import { lazy, Suspense } from 'react'
-import styles from './JokesSection.module.css'
-const Button = lazy(() => import('../commons/Button/Button'))
+import MyContainer from '../commons/MyContainer'
+import Wrapper from '../commons/Wrapper'
+import MyText from '../commons/MyText'
+import MyButton from '../commons/MyButton'
 
 const JokesSection = () => {
 	const jokes = '“Chuck Norris is so awesome when he touches your house it burns down.”'
 	return (
-		<div className={styles.jokesSection}>
-			<div className={styles.jokesWrapper}>
+		<MyContainer>
+			<Wrapper type='column' alignItems='center' gap='1.5rem'>
 				<img src={process.env.PUBLIC_URL + '/images/chuck-norris 1.png'} alt='chuck norris' />
-				<p className={styles.jokes}>{jokes}</p>
-				<Suspense fallback={<h1>Loading.... </h1>}>
-					<Button label='Another!' />
-				</Suspense>
-			</div>
-		</div>
+				<MyText>{jokes}</MyText>
+				<MyButton variant='contained'>Another!</MyButton>
+			</Wrapper>
+		</MyContainer>
 	)
 }
 

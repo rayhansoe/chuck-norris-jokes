@@ -5,7 +5,6 @@
 	width: 100%;
 	background-color: #fffbeb;
 	height: auto;
-	font-family: 'Rye';
 	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
 	transform: translate3d(0, 0, 0);
 }
@@ -30,6 +29,7 @@
 	font-weight: 500;
 	text-transform: uppercase;
 	line-height: 1.875rem;
+	font-family: 'Rye', cursive;
 }
 
 .navButton {

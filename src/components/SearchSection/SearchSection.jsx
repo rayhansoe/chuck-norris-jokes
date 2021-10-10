@@ -1,22 +1,16 @@
-import { lazy, Suspense } from 'react'
-import styles from './SearchSection.module.css'
-const Button = lazy(() => import('../commons/Button/Button'))
+import TextField from '@mui/material/TextField'
+import MyButton from '../commons/MyButton'
+import Wrapper from '../commons/Wrapper'
+import MyContainer from '../commons/MyContainer'
 
 const SearchSection = () => {
 	return (
-		<div className={styles.searchSection}>
-			<div className={styles.searchWrapper}>
-				<input
-					type='text'
-					className={styles.searchBox}
-					onChange={() => 'hh'}
-					placeholder={'Search...'}
-				/>
-				<Suspense fallback={<h1>Loading</h1>}>
-					<Button label='search!' />
-				</Suspense>
-			</div>
-		</div>
+		<MyContainer>
+			<Wrapper justifyContent='space-between'>
+				<TextField sx={{ flexGrow: 1 }} variant='outlined' label='Search...' />
+				<MyButton variant='contained'>Search!</MyButton>
+			</Wrapper>
+		</MyContainer>
 	)
 }
 
