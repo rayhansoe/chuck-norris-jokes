@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+import IconButton from '@mui/material/IconButton'
+import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded'
 
 const Nav = styled.nav`
 	position: relative;
@@ -31,23 +33,33 @@ const NavLogo = styled.h1`
 	font-family: 'Rye', cursive;
 `
 
-const NavButton = styled.img`
+const NavButton = styled(IconButton)`
 	position: absolute;
 	display: block;
 	left: 0.5rem;
 	margin: auto;
 	padding: 0;
-	transform: scale(0.5);
-	cursor: pointer;
+
+	&:hover {
+		color: '#7a3500';
+	}
 `
 
 const NavBar = () => {
-	const slug = true
+	const slug = !true
 	return (
 		<Nav>
 			<NavWrapper>
 				{slug && (
-					<NavButton src={process.env.PUBLIC_URL + '/images/left-arrow-Icon lg.png'} alt='' />
+					<NavButton
+						sx={{
+							position: 'absolute',
+							margin: 'auto',
+							color: '#b45309',
+						}}
+						aria-label='Arrow Left'>
+						<ArrowBackRounded fontSize='medium' />
+					</NavButton>
 				)}
 				<NavLogo>Chuck Norris</NavLogo>
 			</NavWrapper>
