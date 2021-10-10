@@ -1,7 +1,7 @@
 import TextField from '@mui/material/TextField'
-import MyButton from '../commons/MyButton'
-import Wrapper from '../commons/Wrapper'
-import MyContainer from '../commons/MyContainer'
+import MyButton from './commons/MyButton'
+import Wrapper from './commons/Wrapper'
+import MyContainer from './commons/MyContainer'
 
 const SearchSection = () => {
 	return (

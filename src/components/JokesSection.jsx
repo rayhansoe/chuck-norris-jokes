@@ -1,7 +1,7 @@
-import MyContainer from '../commons/MyContainer'
-import Wrapper from '../commons/Wrapper'
-import MyText from '../commons/MyText'
-import MyButton from '../commons/MyButton'
+import MyContainer from './commons/MyContainer'
+import Wrapper from './commons/Wrapper'
+import MyText from './commons/MyText'
+import MyButton from './commons/MyButton'
 
 const JokesSection = () => {
 	const jokes = '“Chuck Norris is so awesome when he touches your house it burns down.”'
