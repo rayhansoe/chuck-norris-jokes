@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import IconButton from '@mui/material/IconButton'
 import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded'
+import { Link } from 'react-router-dom'
 
 const Nav = styled.nav`
 	position: relative;
@@ -45,23 +46,27 @@ const NavButton = styled(IconButton)`
 	}
 `
 
-const NavBar = () => {
-	const slug = !true
+const NavBar = ({ query }) => {
 	return (
 		<Nav>
 			<NavWrapper>
-				{slug && (
+				{query && (
 					<NavButton
+						href='/'
 						sx={{
 							position: 'absolute',
 							margin: 'auto',
 							color: '#b45309',
 						}}
 						aria-label='Arrow Left'>
-						<ArrowBackRounded fontSize='medium' />
+						<Link to='/'>
+							<ArrowBackRounded fontSize='medium' />
+						</Link>
 					</NavButton>
 				)}
-				<NavLogo>Chuck Norris</NavLogo>
+				<NavLogo>
+					<Link to='/'>Chuck Norris</Link>
+				</NavLogo>
 			</NavWrapper>
 		</Nav>
 	)
