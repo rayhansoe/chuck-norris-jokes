@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from '@mui/material'
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import MyButton from './commons/MyButton'
 import MyContainer from './commons/MyContainer'
@@ -26,12 +26,10 @@ const CategorySection = () => {
 	]
 	const [category, setCategory] = useState(() => null)
 	const [inputCategory, setInputCategory] = useState(() => '')
-	const uhm = useRef()
 	return (
 		<MyContainer position='absolute'>
 			<Wrapper justifyContent='space-between'>
 				<Autocomplete
-					ref={uhm}
 					value={category}
 					onChange={(event, newValue) => {
 						setCategory(() => newValue)
