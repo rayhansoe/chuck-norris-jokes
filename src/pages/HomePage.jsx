@@ -20,10 +20,6 @@ const HomePage = () => {
 			<Suspense fallback={<h2>Loading...</h2>}>
 				<CategorySection />
 			</Suspense>
-			{/* <NavBar />
-			<SearchSection />
-			<JokesSection />
-			<CategorySection /> */}
 		</>
 	)
 }
