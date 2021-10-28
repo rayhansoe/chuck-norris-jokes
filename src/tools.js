@@ -9,3 +9,9 @@ export const jokesByQuerySearch = async q => {
 	const response = await data.json()
 	return response
 }
+
+export const jokesByCategory = async c => {
+	const data = await fetch(`https://api.chucknorris.io/jokes/random?category=${c}`)
+	const response = await data.json()
+	return response
+}
