@@ -32,9 +32,8 @@ const SearchResultPage = () => {
 
 			{q ? (
 				<>
-					<h1>{query.get('q')}</h1>
 					<Suspense fallback={<h2>Loading...</h2>}>
-						<JokesSection query={q} type={true} jokes={jokes} />
+						<JokesSection query={'Search Text: ' + q} type={true} jokes={jokes} />
 					</Suspense>
 				</>
 			) : (
