@@ -52,7 +52,6 @@ const NavBar = ({ query }) => {
 			<NavWrapper>
 				{query && (
 					<NavButton
-						href='/'
 						sx={{
 							position: 'absolute',
 							margin: 'auto',
