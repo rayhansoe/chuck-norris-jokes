@@ -30,13 +30,11 @@ const SearchResultPage = () => {
 				<NavBar query={true} />
 			</Suspense>
 
-			{console.log(jokes)}
-
 			{q ? (
 				<>
 					<h1>{query.get('q')}</h1>
 					<Suspense fallback={<h2>Loading...</h2>}>
-						<JokesSection query={q} type={true} />
+						<JokesSection query={q} type={true} jokes={jokes} />
 					</Suspense>
 				</>
 			) : (
