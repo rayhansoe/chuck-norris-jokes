@@ -1,5 +1,6 @@
-import React, { lazy, Suspense, useEffect } from 'react'
+import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
+import { jokesByCategory } from '../tools'
 
 const NavBar = lazy(() => import('../components/NavBar'))
 const JokesSection = lazy(() => import('../components/JokesSection'))
@@ -13,12 +14,18 @@ const CategoryResultPage = props => {
 	let query = useQuery()
 	let q = query.get('q')
 
+	const [jokes, setJokes] = useState(() => '')
+	const [count, setCount] = useState(() => 1)
+
 	useEffect(() => {
-		if (location.pathname && q) {
-			console.log(location.pathname)
-			console.log(q)
+		if (count) {
+			if (location.pathname && q) {
+				jokesByCategory(q).then(r => setJokes(() => r.value))
+			}
 		}
-	}, [location.pathname, q])
+	}, [count, location.pathname, q])
+
+	const handleClick = () => setCount(c => c + 1)
 
 	return (
 		<>
@@ -27,9 +34,8 @@ const CategoryResultPage = props => {
 			</Suspense>
 			{q ? (
 				<>
-					<h1>{query.get('q')}</h1>
 					<Suspense fallback={<h2>Loading...</h2>}>
-						<JokesSection query={q} />
+						<JokesSection query={'Category: ' + q} jokes={jokes} handleClick={handleClick} />
 					</Suspense>
 				</>
 			) : (
