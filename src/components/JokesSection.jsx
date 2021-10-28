@@ -8,11 +8,15 @@ const JokesSection = ({ type, jokes, handleClick }) => {
 		<MyContainer>
 			<Wrapper type='column' alignItems='center' gap='1.5rem'>
 				<img src={process.env.PUBLIC_URL + '/images/chuck-norris 1.png'} alt='chuck norris' />
-				<MyText>{jokes}</MyText>
-				{!type && (
-					<MyButton onClick={handleClick} variant='contained'>
-						Another!
-					</MyButton>
+				{!type ? (
+					<>
+						<MyText>{jokes}</MyText>
+						<MyButton onClick={handleClick} variant='contained'>
+							Another!
+						</MyButton>
+					</>
+				) : (
+					jokes.map(joke => <MyText key={joke.id}>{joke.value}</MyText>)
 				)}
 			</Wrapper>
 		</MyContainer>
