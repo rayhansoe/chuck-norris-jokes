@@ -9,7 +9,7 @@ function useQuery() {
 	return new URLSearchParams(useLocation().search)
 }
 
-const CategoryResultPage = props => {
+const CategoryResultPage = () => {
 	let location = useLocation()
 	let query = useQuery()
 	let q = query.get('q')
