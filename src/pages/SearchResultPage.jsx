@@ -19,7 +19,7 @@ const SearchResultPage = () => {
 	let q = query.get('q')
 
 	useEffect(() => {
-		if (location.pathname && q) {
+		if (location.pathname === '/search' && q) {
 			jokesByQuerySearch(q).then(r => setJokes(() => r.result))
 		}
 	}, [location.pathname, q])
