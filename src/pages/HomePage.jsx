@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useState, useEffect } from 'react'
-import { randomJokes } from '../tools'
+import { checkStatus } from '../tools'
 
 const NavBar = lazy(() => import('../components/NavBar'))
 const JokesSection = lazy(() => import('../components/JokesSection'))
@@ -9,10 +9,26 @@ const CategorySection = lazy(() => import('../components/CategorySection'))
 const HomePage = () => {
 	const [jokes, setJokes] = useState(() => '')
 	const [count, setCount] = useState(() => 1)
+	const [isLoading, setIsLoading] = useState(() => true)
+	const [isError, setIsError] = useState(() => false)
 
 	useEffect(() => {
+		const getJokes = async () => {
+			const check = await checkStatus('https://api.chucknorris.io/jokes/random').catch(err =>
+				console.log(err)
+			)
+
+			check && setJokes(() => check.value)
+
+			!check && setIsError(curr => !curr)
+
+			setTimeout(() => {
+				setIsLoading(() => false)
+			}, 500)
+		}
+
 		if (count) {
-			randomJokes().then(r => setJokes(() => r.value))
+			getJokes()
 		}
 	}, [count])
 
@@ -26,7 +42,12 @@ const HomePage = () => {
 				<SearchSection />
 			</Suspense>
 			<Suspense fallback={<h2>Loading...</h2>}>
-				<JokesSection jokes={jokes} handleClick={handleClick} />
+				<JokesSection
+					jokes={jokes}
+					handleClick={handleClick}
+					isLoading={isLoading}
+					isError={isError}
+				/>
 			</Suspense>
 			<Suspense fallback={<h2>Loading...</h2>}>
 				<CategorySection />
