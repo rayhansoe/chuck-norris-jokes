@@ -1,17 +1,8 @@
-export const randomJokes = async () => {
-	const data = await fetch('https://api.chucknorris.io/jokes/random')
-	const response = await data.json()
-	return response
-}
-
-export const jokesByQuerySearch = async q => {
-	const data = await fetch(`https://api.chucknorris.io/jokes/search?query=${q}`)
-	const response = await data.json()
-	return response
-}
-
-export const jokesByCategory = async c => {
-	const data = await fetch(`https://api.chucknorris.io/jokes/random?category=${c}`)
-	const response = await data.json()
-	return response
+export const checkStatus = async url => {
+	const response = await fetch(url)
+	if (200 && response.status <= 299) {
+		const data = response.json()
+		return data
+	}
+	throw new Error(response.statusText)
 }
