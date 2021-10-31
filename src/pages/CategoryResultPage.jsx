@@ -1,26 +1,43 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
-import { jokesByCategory } from '../tools'
+import { checkStatus } from '../tools'
 
 const NavBar = lazy(() => import('../components/NavBar'))
 const JokesSection = lazy(() => import('../components/JokesSection'))
+const NotFoundSection = lazy(() => import('../components/NotFoundSection'))
 
 function useQuery() {
 	return new URLSearchParams(useLocation().search)
 }
 
 const CategoryResultPage = () => {
+	const [jokes, setJokes] = useState(() => '')
+	const [count, setCount] = useState(() => 1)
+	const [isLoading, setIsLoading] = useState(() => true)
+	const [isError, setIsError] = useState(() => false)
+
 	let location = useLocation()
 	let query = useQuery()
 	let q = query.get('q')
 
-	const [jokes, setJokes] = useState(() => '')
-	const [count, setCount] = useState(() => 1)
-
 	useEffect(() => {
+		const getJokes = async () => {
+			const check = await checkStatus(
+				`https://api.chucknorris.io/jokes/random?category=${q}`
+			).catch(err => console.log(err))
+
+			check && setJokes(() => check.value)
+
+			!check && setIsError(() => false)
+
+			setTimeout(() => {
+				setIsLoading(() => false)
+			}, 500)
+		}
+
 		if (count) {
 			if (location.pathname && q) {
-				jokesByCategory(q).then(r => setJokes(() => r.value))
+				getJokes()
 			}
 		}
 	}, [count, location.pathname, q])
@@ -35,11 +52,19 @@ const CategoryResultPage = () => {
 			{q ? (
 				<>
 					<Suspense fallback={<h2>Loading...</h2>}>
-						<JokesSection query={'Category: ' + q} jokes={jokes} handleClick={handleClick} />
+						<JokesSection
+							query={'Category: ' + q}
+							jokes={jokes}
+							handleClick={handleClick}
+							isError={isError}
+							isLoading={isLoading}
+						/>
 					</Suspense>
 				</>
 			) : (
-				<h1>Error</h1>
+				<Suspense fallback={<h1>Loading...</h1>}>
+					<NotFoundSection />
+				</Suspense>
 			)}
 		</>
 	)
