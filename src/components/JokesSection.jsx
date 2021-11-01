@@ -6,7 +6,16 @@ import MyTitle from './commons/MyTitle'
 
 import { Link } from 'react-router-dom'
 
-const JokesSection = ({ type, jokes, handleClick, query, isLoading, isError, isEmpty }) => {
+const JokesSection = ({
+	type,
+	jokes,
+	handleClick,
+	query,
+	isLoading,
+	isError,
+	isEmpty,
+	isCategoryInvalid,
+}) => {
 	const JokesType1 = () => {
 		if (isLoading) {
 			return (
@@ -22,7 +31,18 @@ const JokesSection = ({ type, jokes, handleClick, query, isLoading, isError, isE
 			return (
 				<>
 					<MyText>Something went wrong...</MyText>
-					<MyButton variant='outlined'>
+					<MyButton variant='contained'>
+						<Link to='/'>Back to Home</Link>
+					</MyButton>
+				</>
+			)
+		}
+
+		if (isCategoryInvalid) {
+			return (
+				<>
+					<MyText>Category yang anda masukan salah.</MyText>
+					<MyButton variant='contained'>
 						<Link to='/'>Back to Home</Link>
 					</MyButton>
 				</>
