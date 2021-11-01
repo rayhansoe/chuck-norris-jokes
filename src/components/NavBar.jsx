@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import IconButton from '@mui/material/IconButton'
 import ArrowBackRounded from '@mui/icons-material/ArrowBackRounded'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const Nav = styled.nav`
 	position: relative;
@@ -47,25 +47,26 @@ const NavButton = styled(IconButton)`
 `
 
 const NavBar = ({ query }) => {
+	let history = useHistory()
+
+	const handleClick = () => history.push('/')
+
 	return (
 		<Nav>
 			<NavWrapper>
 				{query && (
 					<NavButton
+						onClick={handleClick}
 						sx={{
 							position: 'absolute',
 							margin: 'auto',
 							color: '#b45309',
 						}}
 						aria-label='Arrow Left'>
-						<Link to='/'>
-							<ArrowBackRounded fontSize='medium' />
-						</Link>
+						<ArrowBackRounded fontSize='medium' />
 					</NavButton>
 				)}
-				<NavLogo>
-					<Link to='/'>Chuck Norris</Link>
-				</NavLogo>
+				<NavLogo onClick={handleClick}>Chuck Norris</NavLogo>
 			</NavWrapper>
 		</Nav>
 	)
