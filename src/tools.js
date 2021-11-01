@@ -6,3 +6,22 @@ export const checkStatus = async url => {
 	}
 	throw new Error(response.statusText)
 }
+
+export const category = [
+	'animal',
+	'career',
+	'celebrity',
+	'dev',
+	'explicit',
+	'fashion',
+	'food',
+	'history',
+	'money',
+	'movie',
+	'music',
+	'political',
+	'religion',
+	'science',
+	'sport',
+	'travel',
+]
