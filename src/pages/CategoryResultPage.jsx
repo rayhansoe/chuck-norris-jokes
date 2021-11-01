@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
-import { checkStatus } from '../tools'
+import { checkStatus, category } from '../tools'
 
 const NavBar = lazy(() => import('../components/NavBar'))
 const JokesSection = lazy(() => import('../components/JokesSection'))
@@ -15,6 +15,7 @@ const CategoryResultPage = () => {
 	const [count, setCount] = useState(() => 1)
 	const [isLoading, setIsLoading] = useState(() => true)
 	const [isError, setIsError] = useState(() => false)
+	const [isCategoryInvalid, setisCategoryInvalid] = useState(() => false)
 
 	let location = useLocation()
 	let query = useQuery()
@@ -35,9 +36,20 @@ const CategoryResultPage = () => {
 			}, 500)
 		}
 
+		const categoryInvalid = async () => {
+			setisCategoryInvalid(() => true)
+
+			setTimeout(() => {
+				setIsLoading(() => false)
+			}, 500)
+		}
+
 		if (count) {
-			if (location.pathname && q) {
+			if (location.pathname && category.includes(q)) {
 				getJokes()
+			}
+			if (location.pathname && !category.includes(q)) {
+				categoryInvalid()
 			}
 		}
 	}, [count, location.pathname, q])
@@ -58,6 +70,7 @@ const CategoryResultPage = () => {
 							handleClick={handleClick}
 							isError={isError}
 							isLoading={isLoading}
+							isCategoryInvalid={isCategoryInvalid}
 						/>
 					</Suspense>
 				</>
