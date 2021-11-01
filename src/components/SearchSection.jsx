@@ -3,10 +3,23 @@ import MyButton from './commons/MyButton'
 import Wrapper from './commons/Wrapper'
 import MyContainer from './commons/MyContainer'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 const SearchSection = () => {
 	const [keyWord, setKeyWord] = useState(() => '')
+
+	let history = useHistory()
+
+	const handleChange = e => setKeyWord(() => e.target.value)
+
+	const onEnter = e => {
+		if (e.key === 'Enter' && e.target.value.length !== 0) {
+			history.push(`/search?q=${keyWord}`)
+		}
+	}
+
+	const handleClick = () => history.push(`/search?q=${keyWord}`)
+
 	return (
 		<MyContainer>
 			<Wrapper justifyContent='space-between'>
@@ -15,12 +28,11 @@ const SearchSection = () => {
 					variant='outlined'
 					label='Search...'
 					value={keyWord}
-					onChange={e => {
-						setKeyWord(() => e.target.value)
-					}}
+					onChange={handleChange}
+					onKeyDown={onEnter}
 				/>
-				<MyButton variant='contained' disabled={!keyWord && true}>
-					<Link to={`/search?q=${keyWord}`}>Search!</Link>
+				<MyButton variant='contained' disabled={!keyWord && true} onClick={handleClick}>
+					Search!
 				</MyButton>
 			</Wrapper>
 		</MyContainer>
